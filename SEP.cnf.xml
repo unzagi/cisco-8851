@@ -65,7 +65,7 @@
                 <port>5060</port>
                 <voipControlPort>5060</voipControlPort>
                 <name>{{ extension number }</name>
-                <displayName>Living Room</displayName>
+                <displayName>{{ display-name }}</displayName>
                 <autoAnswer>
                     <autoAnswerEnabled>2</autoAnswerEnabled>
                 </autoAnswer>
