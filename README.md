@@ -1,2 +1,4 @@
 # cisco-8851
-My Cisco PBX cnf.xml template
+This is a templated version of my working Cisco PBX cnf.xml file.
+
+

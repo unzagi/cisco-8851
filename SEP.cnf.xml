@@ -1,0 +1,182 @@
+<device>
+    <fullConfig>true</fullConfig>
+    <deviceProtocol>SIP</deviceProtocol>
+    <devicePool>
+        <dateTimeSetting>
+            <dateTemplate>M/D/YA</dateTemplate>
+            <timeZone>GMT Standard/Daylight Time</timeZone>
+            <ntps>
+                <ntp priority="0">
+                    <name>pool.ntp.org</name>
+                    <ntpMode>unicast</ntpMode>
+                </ntp>
+            </ntps>
+        </dateTimeSetting>
+        <callManagerGroup>
+            <members>
+                <member priority="0">
+                    <callManager>
+                        <ports>
+                            <sipPort>5060</sipPort>
+                        </ports>
+                        <processNodeName>{{ ip-address }}</processNodeName>
+                    </callManager>
+                </member>
+            </members>
+        </callManagerGroup>
+    </devicePool>
+    <sipProfile>
+        <sipProxies>
+            <registerWithProxy>true</registerWithProxy>
+        </sipProxies>
+        <sipCallFeatures>
+            <cnfJoinEnabled>true</cnfJoinEnabled>
+            <localCfwdEnable>true</localCfwdEnable>
+            <callForwardURI>service-uri-cfwdall</callForwardURI>
+            <callPickupURI>*8</callPickupURI>
+            <callPickupGroupURI>service-uri-gpickup</callPickupGroupURI>
+            <meetMeServiceURI>service-uri-meetme</meetMeServiceURI>
+            <callHoldRingback>2</callHoldRingback>
+            <semiAttendedTransfer>true</semiAttendedTransfer>
+            <anonymousCallBlock>2</anonymousCallBlock>
+            <callerIdBlocking>2</callerIdBlocking>
+            <dndControl>1</dndControl>
+            <dndCallAlert>1</dndCallAlert>
+            <remoteCcEnable>false</remoteCcEnable>
+        </sipCallFeatures>
+        <sipStack>
+            <timerRegisterExpires>3600</timerRegisterExpires>
+            <timerRegisterDelta>10</timerRegisterDelta>
+            <timerInviteExpires>180</timerInviteExpires>
+            <timerKeepAliveExpires>3600</timerKeepAliveExpires>
+            <timerSubscribeExpires>3600</timerSubscribeExpires>
+            <timerSubscribeDelta>5</timerSubscribeDelta>
+            <timerT1>500</timerT1>
+            <timerT2>4000</timerT2>
+            <remotePartyID>true</remotePartyID>
+        </sipStack>
+        <sipLines>
+            <line button="1" lineIndex="1">
+                <featureID>9</featureID>
+                <featureLabel>Home</featureLabel>
+                <contact>{{ extension number }}</contact>
+                <speedDialNumber></speedDialNumber>
+                <proxy>USECALLMANAGER</proxy>
+                <port>5060</port>
+                <voipControlPort>5060</voipControlPort>
+                <name>{{ extension number }</name>
+                <displayName>Living Room</displayName>
+                <autoAnswer>
+                    <autoAnswerEnabled>2</autoAnswerEnabled>
+                </autoAnswer>
+                <callWaiting>1</callWaiting>
+                <authName>{{ extension number }</authName>
+                <authPassword>{{ user secret }}</authPassword>
+                <sharedLine>false</sharedLine>
+                <messagesNumber>*98</messagesNumber>
+                <messageWaitingLampPolicy>3</messageWaitingLampPolicy>
+                <ringSettingActive>5</ringSettingActive>
+                <forwardCallInfoDisplay>
+                    <callerName>true</callerName>
+                    <callerNumber>true</callerNumber>
+                    <redirectedNumber>true</redirectedNumber>
+                    <dialedNumber>true</dialedNumber>
+                </forwardCallInfoDisplay>
+                <maxNumCalls>5</maxNumCalls>
+                <busyTrigger>2</busyTrigger>
+            </line>
+            <line button="2">
+                <featureID>2</featureID>
+                <featureLabel>Office</featureLabel>
+                <speedDialNumber>1101</speedDialNumber>
+            </line>
+        </sipLines>
+        <enableVad>true</enableVad>
+        <preferredCodec>g711ulaw</preferredCodec>
+        <dialTemplate>dialplan.xml</dialTemplate>
+        <softKeyControl>1</softKeyControl>
+        <softKeyFile>softkey1.xml</softKeyFile>
+        <kpml>0</kpml>
+        <phoneLabel>{{ telephone number }}</phoneLabel>
+        <stutterMsgWaiting>2</stutterMsgWaiting>
+        <disableLocalSpeedDialConfig>true</disableLocalSpeedDialConfig>
+        <dscpForAudio>184</dscpForAudio>
+        <dscpVideo>136</dscpVideo>
+        <startMediaPort>10000</startMediaPort>
+        <stopMediaPort>20000</stopMediaPort>
+    </sipProfile>
+    <commonProfile>
+        <phonePassword>cisco</phonePassword>
+        <callLogBlfEnabled>0</callLogBlfEnabled>
+    </commonProfile>
+    <featurePolicyFile>featurePolicy1.xml</featurePolicyFile>
+    <loadInformation>sip88xx.11-5-1-18</loadInformation>
+    <vendorConfig>
+        <cucmGSMHandoffPreference>1</cucmGSMHandoffPreference>
+        <sshAccess>0</sshAccess>
+        <webAccess>1</webAccess>
+        <webProtocol>1</webProtocol>
+    </vendorConfig>
+    <commonConfig>
+        <videoCapability>0</videoCapability>
+        <ciscoCamera>0</ciscoCamera>
+    </commonConfig>
+    <addOnModules>
+        <addOnModule idx="1">
+            <deviceType>CKEM</deviceType>
+            <deviceLine>36</deviceLine>
+            <loadInformation></loadInformation>
+        </addOnModule>
+    </addOnModules>
+    <sshUserId>s2</sshUserId>
+    <sshPassword>cisco</sshPassword>
+    <userId></userId>
+    <phoneServices>
+        <provisioning>2</provisioning>
+        <phoneService  type="1" category="0">
+            <name>Missed Calls</name>
+            <phoneLabel></phoneLabel>
+            <url>Application:Cisco/MissedCalls</url>
+            <vendor></vendor>
+            <version></version>
+        </phoneService>
+        <phoneService  type="1" category="0">
+            <name>Received Calls</name>
+            <phoneLabel></phoneLabel>
+            <url>Application:Cisco/ReceivedCalls</url>
+            <vendor></vendor>
+            <version></version>
+        </phoneService>
+        <phoneService  type="1" category="0">
+            <name>Placed Calls</name>
+            <phoneLabel></phoneLabel>
+            <url>Application:Cisco/PlacedCalls</url>
+            <vendor></vendor>
+            <version></version>
+        </phoneService>
+        <phoneService  type="2" category="0">
+            <name>Voicemail</name>
+            <phoneLabel></phoneLabel>
+            <url>Application:Cisco/Voicemail</url>
+            <vendor></vendor>
+            <version></version>
+        </phoneService>
+    </phoneServices>
+    <versionStamp>0003330027034305</versionStamp>
+    <userLocale>
+        <name>SIP_English_United_States</name>
+        <langCode>en_US</langCode>
+    </userLocale>
+    <networkLocale>SIP_United_States</networkLocale>
+    <networkLocaleInfo>
+        <name>United_States</name>
+    </networkLocaleInfo>
+    <authenticationURL></authenticationURL>
+    <directoryURL>http://{{ IP address of FreePBX}}:80/localdirectory</directoryURL>
+    <servicesURL>http://{{ IP address of FreePBX}}:80/CMEserverForPhone/serviceurl</servicesURL>
+    <dscpForSCCPPhoneServices>0</dscpForSCCPPhoneServices>
+    <dscpForCm2Dvce>96</dscpForCm2Dvce>
+    <transportLayerProtocol>2</transportLayerProtocol>
+    <telnetAccess>1</telnetAccess>
+</device>
+ 
